@@ -12,6 +12,8 @@ import SplitBill from './pages/SplitBill'
 import WalletConnect from './components/WalletConnect'
 import SolanaPayment from './components/SolanaPayment'
 import DareMode from './pages/DareMode'
+import ThemeToggle from './components/ThemeToggle'
+import goblinKing from './assets/goblin-king.png'
 
 const groups = [
   { name: 'Friday Night Chaos', people: 5, amount: '₹2,500', pending: '₹1,400', color: '#b8ed70', emoji: '🍕' },
@@ -50,7 +52,11 @@ export default function App() {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <div className="brand-icon">🧌</div>
+          <img
+          src={goblinKing}
+          alt="GoblinPay Goblin King"
+          className="brand-mascot"
+          />
           <div>
             <div className="brand-name">goblin<span>pay</span></div>
             <div className="brand-caption">SPLIT. SETTLE. REPEAT.</div>
@@ -76,6 +82,8 @@ export default function App() {
             {item.name === 'Dare Mode' && <span className="nav-new">NEW</span>}
           </button>
         ))}
+
+        <ThemeToggle />
 
         <div className="sidebar-bottom">
           <div className="xp-card">

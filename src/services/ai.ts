@@ -22,7 +22,9 @@ export async function scanReceipt(file: File): Promise<Receipt> {
     reader.readAsDataURL(file)
   })
 
-  const response = await fetch('http://localhost:5000/api/scan-receipt', {
+  /*const response = await fetch('http://localhost:5000/api/scan-receipt', {*/
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+  const response = await fetch(`${API_URL}/api/scan-receipt`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

@@ -28,3 +28,12 @@ dist-ssr
 !.env.example
 server/.env
 client/.env
+
+node_modules/
+node_modules - Copy/
+dist/
+.env
+.env.*
+!.env.example
+server/.env
+tsconfig.node - Copy.json
