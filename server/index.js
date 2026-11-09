@@ -9,7 +9,13 @@ const app = express()
 app.use(cors())
 app.use(express.json({ limit: '12mb' }))
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+const geminiKey = process.env.GEMINI_API_KEY?.trim()
+
+if (!geminiKey) {
+  throw new Error('GEMINI_API_KEY is missing from the server environment')
+}
+
+const genAI = new GoogleGenerativeAI(geminiKey)
 
 app.post('/api/scan-receipt', async (req, res) => {
   try {
@@ -20,7 +26,7 @@ app.post('/api/scan-receipt', async (req, res) => {
     }
 
     const model = genAI.getGenerativeModel({
-      model: 'gemini-2.5-flash'
+        model: 'gemini-3.8-flash'
     })
 
     const result = await model.generateContent([
