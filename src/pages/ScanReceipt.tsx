@@ -51,11 +51,18 @@ export default function ScanReceipt({ onBack }: { onBack?: () => void }) {
         reader.readAsDataURL(file)
       })
 
-      const response = await fetch('http://localhost:5000/api/scan-receipt', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image, mimeType: file.type })
-      })
+      const API_URL = (
+  import.meta.env.VITE_API_URL?.trim() ||
+  (import.meta.env.DEV
+    ? 'http://localhost:5000'
+    : 'https://goblinpay-api.onrender.com')
+).replace(/\/+$/, '')
+
+const response = await fetch(`${API_URL}/api/scan-receipt`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ image, mimeType: file.type })
+})
 
       const data = await response.json()
 
