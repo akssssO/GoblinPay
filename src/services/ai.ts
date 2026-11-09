@@ -22,8 +22,12 @@ export async function scanReceipt(file: File): Promise<Receipt> {
     reader.readAsDataURL(file)
   })
 
-  /*const response = await fetch('http://localhost:5000/api/scan-receipt', {*/
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+  const API_URL = (
+  import.meta.env.VITE_API_URL?.trim() ||
+  (import.meta.env.DEV
+    ? 'http://localhost:5000'
+    : 'https://goblinpay-api.onrender.com')
+).replace(/\/+$/, '')
   const response = await fetch(`${API_URL}/api/scan-receipt`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
